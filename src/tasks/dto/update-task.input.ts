@@ -11,7 +11,4 @@ export class UpdateTaskInput extends PartialType(CreateTaskInput) {
 
   @Field()
   status: string;
-
-  @Field(type => Int)
-  order: number;
 }

@@ -25,6 +25,7 @@ type Mutation {
   createList(createListInput: CreateListInput!): List!
   createTask(createTaskInput: CreateTaskInput!): Task!
   updateTask(updateTaskInput: UpdateTaskInput!): Task!
+  updateTaskOrder(updateTaskOrder: UpdateTaskOrder!): Task!
 }
 
 input CreateListInput {
@@ -41,5 +42,10 @@ input UpdateTaskInput {
   listId: Int
   id: Int!
   status: String!
-  order: Int!
+}
+
+input UpdateTaskOrder {
+  name: String
+  listId: Int
+  ids: [Int!]!
 }

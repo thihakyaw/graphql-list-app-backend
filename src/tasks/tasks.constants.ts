@@ -1,4 +1,5 @@
 export enum TasksConstants {
-    INACTIVE = 'inactive',
-    ACTIVE = 'active',
+    INCOMPLETE = 'incomplete',
+    IN_PROGRESS = 'in_progress',
+    COMPLETED = 'completed'
 }

@@ -3,9 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CreateTaskInput } from './dto/create-task.input';
 import { UpdateTaskInput } from './dto/update-task.input';
 import { Task } from './entities/task.entity';
-import { Repository } from 'typeorm'
-import { List } from 'src/lists/entities/list.entity';
-import { ListsService } from 'src/lists/lists.service';
+import { Repository, In } from 'typeorm'
 import { TasksConstants } from './tasks.constants';
 
 @Injectable()
@@ -15,16 +13,42 @@ export class TasksService {
     private tasksRepository: Repository<Task>,
 ) {}
 
-  async create(createTaskInput: CreateTaskInput) {
-    const newTask = await this.tasksRepository.create({status: TasksConstants.INACTIVE, order: 1,...createTaskInput});
+  async create(createTaskInput: CreateTaskInput): Promise<Task> {
+    let latestTask = await this.tasksRepository.find({
+      where : { listId: createTaskInput.listId },
+      order: {order : "DESC"},
+      take: 1
+    });
+
+    const newTask = await this.tasksRepository.create({
+      status: TasksConstants.INCOMPLETE, 
+      order: (latestTask.length != 0) ? latestTask[0].order + 1 : 1,
+      ...createTaskInput
+    });
+
     return this.tasksRepository.save(newTask);
   }
 
-  find(listId: number) {
-    return this.tasksRepository.find({where : {listId: listId}});
+  find(listId: number):Promise<Task[]> {
+    return this.tasksRepository.find({
+      where : { listId: listId }
+    });
   }
 
-  update(updateTaskInput: UpdateTaskInput) {
+  update(updateTaskInput: UpdateTaskInput): Promise<Task> {
     return this.tasksRepository.save(updateTaskInput);
+  }
+
+  async updateOrder(ids: number[]): Promise<Task[]> {
+    let order = 1;
+    for (let id of ids) {
+      await this.tasksRepository.save({
+        id: id,
+        order: order,
+      });
+      order++;
+    }
+
+    return this.tasksRepository.find({where :{id : In(ids)}});
   }
 }
