@@ -21,7 +21,7 @@ export class TasksResolver {
     return this.tasksService.update(updateTaskInput);
   }
 
-  @Mutation(() => Task, {name: 'updateTaskOrder'})
+  @Mutation(() => [Task], {name: 'updateTaskOrder'})
   async updateOrder(@Args('updateTaskOrder') updateTaskOrder: UpdateTaskOrder): Promise<Task[]> {
     let ids = updateTaskOrder.ids;
     return this.tasksService.updateOrder(ids);

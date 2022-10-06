@@ -31,7 +31,8 @@ export class TasksService {
 
   find(listId: number):Promise<Task[]> {
     return this.tasksRepository.find({
-      where : { listId: listId }
+      where : { listId: listId },
+      order: {order : "ASC"}
     });
   }
 
@@ -49,6 +50,9 @@ export class TasksService {
       order++;
     }
 
-    return this.tasksRepository.find({where :{id : In(ids)}});
+    return this.tasksRepository.find({
+      where :{id : In(ids)},
+      order: {order : "ASC"}
+    });
   }
 }

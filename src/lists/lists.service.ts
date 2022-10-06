@@ -19,6 +19,10 @@ export class ListsService {
         return this.listsRepository.save(newList);
     }
 
+    findOne(id: number): Promise<List> {
+        return this.listsRepository.findOneOrFail({where: {id: id}});
+    }
+
     async findAll(): Promise<List[]> {
         return this.listsRepository.find();
     }

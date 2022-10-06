@@ -19,13 +19,14 @@ type Task {
 
 type Query {
   lists: [List!]!
+  list(id: Int!): List!
 }
 
 type Mutation {
   createList(createListInput: CreateListInput!): List!
   createTask(createTaskInput: CreateTaskInput!): Task!
   updateTask(updateTaskInput: UpdateTaskInput!): Task!
-  updateTaskOrder(updateTaskOrder: UpdateTaskOrder!): Task!
+  updateTaskOrder(updateTaskOrder: UpdateTaskOrder!): [Task!]!
 }
 
 input CreateListInput {
