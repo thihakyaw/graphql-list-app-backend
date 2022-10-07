@@ -1,5 +1,5 @@
 import { Args, Int, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
-import { Task } from 'src/tasks/entities/task.entity';
+import { Task } from '../tasks/entities/task.entity';
 import { CreateListInput } from './dto/create-list.input';
 import { List } from './entities/list.entity';
 import { ListsService } from './lists.service';

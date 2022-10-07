@@ -1,0 +1,30 @@
+version: '3'
+services:
+  node-app:
+    build:
+      context: .
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_DATABASE=${DB_DATABASE}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+    command: npm run start
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+  mysql:
+      volumes:
+        - 'mysql:/var/lib/mysql'
+      image: 'mysql/mysql-server:8.0'
+      environment:
+          MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+          MYSQL_DATABASE: '${DB_DATABASE}'
+          MYSQL_USER: '${DB_USERNAME}'
+          MYSQL_PASSWORD: '${DB_PASSWORD}'
+volumes:
+  mysql:

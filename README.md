@@ -1,73 +1,373 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# GraphQL List App
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Getting Started
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+- clone the repo to your local machine
 
-## Description
+`git clone [git@github.com](mailto:git@github.com):thihakyaw/graphql-list-app-backend.git`
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- get into the project directory
 
-## Installation
+`cd graphql-list-app-backend`
 
-```bash
-$ npm install
+- create an `.env` file and setup database
+
+paste those initial values from `.env.example` into `.env`
+
+## Setup On Docker
+
+If you are familiar with docker, good news. I have dockerized this assignment.
+
+And add respective values. It should be something like this - 
+
+** DB_HOST must be `mysql` and DB_PORT must be `3306`. Because the host name is base on the image name of the docker **
+
+```json
+#Database
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=graphql_list_app
+DB_USERNAME=root
+DB_PASSWORD=secret
 ```
 
-## Running the app
+Run `docker-compose up -d` and wait for the build to be completed. After the build has finished, you can skip to GraphQL Playground section of this document.
 
-```bash
-# development
-$ npm run start
+## Setup On Local
 
-# watch mode
-$ npm run start:dev
+And add respective values. It should be something like this - 
 
-# production mode
-$ npm run start:prod
+```
+#Database
+DB_HOST=localhost
+DB_PORT=3306
+DB_DATABASE=graphql_list_app
+DB_USERNAME=root
+DB_PASSWORD=secret
 ```
 
-## Test
+** You need to create a database before you running project. Go to your mysql client and run this query **
 
-```bash
-# unit tests
-$ npm run test
+`create database graphql_list_app`
 
-# e2e tests
-$ npm run test:e2e
+Or the database name you prefer
 
-# test coverage
-$ npm run test:cov
+- install dependencies
+
+`npm install`
+
+- start the project
+
+`npm run start:dev`
+
+** When the project is initiated, the tables will automatically migrate to the database. **
+
+## GraphQL Playground
+
+When the project is successfully build, go to  GraphQL Playground [`http://localhost:3000/graphql`](http://localhost:3000/graphql)
+
+You can start running queries in the GraphQL Playground
+
+## Queries
+
+### 1. Creating A List
+
+Run this query in the GraphQL playground to create a list.
+
+Replace the name of the list with `{{name}}` 
+
+```graphql
+mutation {
+  createList(createListInput: {
+    name: {{name}}
+  }) {
+    id, name
+  }
+}
 ```
 
-## Support
+Sample Response
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```json
+{
+  "data": {
+    "createList": {
+      "id": 5,
+      "name": "Final Test #2"
+    }
+  }
+}
+```
 
-## Stay in touch
+### 2. Creating A Task
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Run this query in the GraphQL playground to create a task.
 
-## License
+Replace the name of the task in `{{name}}` .
 
-Nest is [MIT licensed](LICENSE).
+Replace the id of the list in `{{id}}`  that you previously created.
+
+```graphql
+mutation {
+  createTask(createTaskInput: {
+    name: {{name}},
+    listId: {{id}}
+  }) {
+    id, name, status, order
+  }
+}
+```
+
+Sample Response
+
+```json
+{
+  "data": {
+    "createTask": {
+      "id": 12,
+      "name": "A New Task",
+      "status": "incomplete",
+      "order": 1
+    }
+  }
+}
+```
+
+### 3. Get A List Of Lists
+
+Run this query in the GraphQL playground to get a list of lists alongside with tasks. The tasks are in ascending order.
+
+```graphql
+{
+  lists {
+    id
+    name
+    tasks {
+      id, name, order
+    }
+  }
+}
+```
+
+Sample Response
+
+```json
+{
+  "data": {
+    "lists": [
+      {
+        "id": 1,
+        "name": "Assignment #1",
+        "tasks": [
+          {
+            "id": 2,
+            "name": "Updating Finish in 22 hours",
+            "order": 1
+          },
+          {
+            "id": 4,
+            "name": "The Sorting Order Task",
+            "order": 2
+          },
+          {
+            "id": 1,
+            "name": "Finish in 72 hours",
+            "order": 3
+          },
+          {
+            "id": 5,
+            "name": "Another Sorting Order Task #",
+            "order": 4
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Assignment #3",
+        "tasks": [
+          {
+            "id": 3,
+            "name": "Updating Another Task for #3",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "A list to test order",
+        "tasks": [
+          {
+            "id": 6,
+            "name": "Order Task",
+            "order": 1
+          },
+          {
+            "id": 7,
+            "name": "Order Task #2",
+            "order": 2
+          },
+          {
+            "id": 8,
+            "name": "Order Task #3",
+            "order": 3
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "name": "Final Test",
+        "tasks": [
+          {
+            "id": 11,
+            "name": "Update Final Task #3",
+            "order": 1
+          },
+          {
+            "id": 9,
+            "name": "Final Task #1",
+            "order": 2
+          },
+          {
+            "id": 10,
+            "name": "Final Task #2",
+            "order": 3
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "name": "Final Test #2",
+        "tasks": [
+          {
+            "id": 12,
+            "name": "A New Task",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+### 4. Get One List
+
+Run this query in the GraphQL playground to get one specific list alongside with tasks. The tasks are in ascending order.
+
+Replace the id of the list that you want to retrieve in `{{id}}`  
+
+```graphql
+{
+  list(id: {{id}}) {
+    id
+    name,
+    tasks {
+      id, name, order
+    }
+  }
+}
+```
+
+Sample Response
+
+```json
+{
+  "data": {
+    "list": {
+      "id": 5,
+      "name": "Final Test #2",
+      "tasks": [
+        {
+          "id": 12,
+          "name": "A New Task",
+          "order": 1
+        }
+      ]
+    }
+  }
+}
+```
+
+### 5. Update The Task
+
+Run this query in the GraphQL playground to update a task.
+
+Replace the id of the task that you want to update in `{{id}}`  
+
+Replace the name of the task that you want to update in `{{name}}`  
+
+Replace the status of the task that you want to update in `{{status}}`  
+
+```graphql
+mutation {
+  updateTask(updateTaskInput: {
+    id: {{id}},
+    name: {{name}},
+    status: {{status}},
+  }) {
+    id, name, status
+  }
+}
+```
+
+Sample Response
+
+```json
+{
+  "data": {
+    "updateTask": {
+      "id": 12,
+      "name": "Update a Task",
+      "status": "active"
+    }
+  }
+}
+```
+
+### 6. Sort The Tasks
+
+Run this query in the GraphQL playground to sort the tasks that is under a list.
+
+Replace the id array of the task that is under a list in `{{[id]}}`  
+
+example - `[11, 9, 10]`
+
+**
+
+This will sort the task in order of the array. Normally this should validate the array that are part of the same list or not. Since this assignment is time limited, I only focused on its main functionality. **
+
+```graphql
+mutation {
+  updateTaskOrder(updateTaskOrder: {
+    ids: {{[id]}}
+  }) {
+      id, name, order
+  }
+}
+```
+
+Sample Response - 
+
+```json
+{
+  "data": {
+    "updateTaskOrder": [
+      {
+        "id": 11,
+        "name": "Update Final Task #3",
+        "order": 1
+      },
+      {
+        "id": 9,
+        "name": "Final Task #1",
+        "order": 2
+      },
+      {
+        "id": 10,
+        "name": "Final Task #2",
+        "order": 3
+      }
+    ]
+  }
+}
+```
