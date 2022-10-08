@@ -1,5 +1,13 @@
 # GraphQL List App
 
+## Introduction
+
+I use NestJS framework for this assignment because its use TypeScript and the framework is pretty mature with GraphQL. NestJS meets all the requirements for this assignment.
+
+Nest (NestJS) is a framework for building efficient, scalable Node.js ****server-side applications.
+
+[https://nestjs.com](https://nestjs.com/)
+
 ## Getting Started
 
 - clone the repo to your local machine
@@ -16,7 +24,7 @@ paste those initial values from `.env.example` into `.env`
 
 ## Setup On Docker
 
-If you are familiar with docker, good news. I have dockerized this assignment.
+If you are familiar with docker, I have also dockerized this assignment.
 
 And add respective values. It should be something like this - 
 
@@ -61,6 +69,16 @@ Or the database name you prefer
 `npm run start:dev`
 
 ** When the project is initiated, the tables will automatically migrate to the database. **
+
+## Run Unit Test
+
+Due to the time limitation, we cannot run tests in docker container. Docker is only for testing the GraphQL. However, you can run test on locally by -
+
+`npm test`
+
+![Screen Shot 2022-10-08 at 10.35.52.png](GraphQL%20List%20App%20da2852cb927c414685e406e928167b9a/Screen_Shot_2022-10-08_at_10.35.52.png)
+
+** Because of the time limitation, I wasn’t able to add `e2e`  tests. And if I have more time, I can improve my test suites with test database.**
 
 ## GraphQL Playground
 
@@ -143,7 +161,7 @@ Run this query in the GraphQL playground to get a list of lists alongside with t
     id
     name
     tasks {
-      id, name, order
+      id, name, status, order
     }
   }
 }
@@ -162,21 +180,25 @@ Sample Response
           {
             "id": 2,
             "name": "Updating Finish in 22 hours",
+						"status": "in_progress",
             "order": 1
           },
           {
             "id": 4,
             "name": "The Sorting Order Task",
+						"status": "incomplete",
             "order": 2
           },
           {
             "id": 1,
             "name": "Finish in 72 hours",
+						"status": "incomplete",
             "order": 3
           },
           {
             "id": 5,
             "name": "Another Sorting Order Task #",
+						"status": "completed",
             "order": 4
           }
         ]
@@ -188,6 +210,7 @@ Sample Response
           {
             "id": 3,
             "name": "Updating Another Task for #3",
+						"status": "completed",
             "order": 2
           }
         ]
@@ -199,16 +222,19 @@ Sample Response
           {
             "id": 6,
             "name": "Order Task",
+						"status": "incomplete",
             "order": 1
           },
           {
             "id": 7,
             "name": "Order Task #2",
+						"status": "incomplete",
             "order": 2
           },
           {
             "id": 8,
             "name": "Order Task #3",
+						"status": "incomplete",
             "order": 3
           }
         ]
@@ -220,16 +246,19 @@ Sample Response
           {
             "id": 11,
             "name": "Update Final Task #3",
+						"status": "complete",
             "order": 1
           },
           {
             "id": 9,
             "name": "Final Task #1",
+						"status": "incomplete",
             "order": 2
           },
           {
             "id": 10,
             "name": "Final Task #2",
+						"status": "incomplete",
             "order": 3
           }
         ]
@@ -241,6 +270,7 @@ Sample Response
           {
             "id": 12,
             "name": "A New Task",
+						"status": "incomplete",
             "order": 1
           }
         ]
@@ -262,7 +292,7 @@ Replace the id of the list that you want to retrieve in `{{id}}`
     id
     name,
     tasks {
-      id, name, order
+      id, name, status, order
     }
   }
 }
@@ -280,6 +310,7 @@ Sample Response
         {
           "id": 12,
           "name": "A New Task",
+					"status": "incomplete",
           "order": 1
         }
       ]
@@ -330,7 +361,7 @@ Run this query in the GraphQL playground to sort the tasks that is under a list.
 
 Replace the id array of the task that is under a list in `{{[id]}}`  
 
-example - `[11, 9, 10]`
+example - `[11, 9, 10]` (Those `ids` needs to be part of the same one list)
 
 **
 
@@ -341,7 +372,7 @@ mutation {
   updateTaskOrder(updateTaskOrder: {
     ids: {{[id]}}
   }) {
-      id, name, order
+      id, name, status, order
   }
 }
 ```
@@ -355,16 +386,19 @@ Sample Response -
       {
         "id": 11,
         "name": "Update Final Task #3",
+				"status": "completed",
         "order": 1
       },
       {
         "id": 9,
         "name": "Final Task #1",
+				"status": "incomplete",
         "order": 2
       },
       {
         "id": 10,
         "name": "Final Task #2",
+				"status": "incomplete",
         "order": 3
       }
     ]

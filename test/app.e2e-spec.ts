@@ -1,12 +1,30 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { AppModule } from './../src/app.module';
+import { AppModule } from '../src/app.module';
+import { INestApplication } from '@nestjs/common';
+import { List } from '../src/lists/entities/list.entity';
 
-describe('AppController (e2e)', () => {
+const lists: List[] = [
+  {
+    id: 1,
+    name: 'Product Meeting',
+  },
+  {
+    id: 2,
+    name: 'Sprint Planning',
+  },
+  {
+    id: 3,
+    name: 'Backend List',
+  },
+];
+
+const gql = '/graphql';
+
+describe('GraphQL AppResolver (e2e) {Supertest}', () => {
   let app: INestApplication;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
@@ -15,10 +33,21 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+  afterAll(async () => {
+    await app.close();
+  });
+
+  describe(gql, () => {
+    describe('lists', () => {
+      it('should get the lists array', () => {
+        return request(app.getHttpServer())
+          .post(gql)
+          .send({ query: '{lists {id name }}' })
+          .expect(200)
+          .expect((res) => {
+            expect(res.body.data.lists).toEqual(lists);
+          });
+      });
+    });
   });
 });

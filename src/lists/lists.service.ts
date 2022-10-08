@@ -14,7 +14,7 @@ export class ListsService {
         private tasksService: TasksService,
     ) {}
 
-    async createList(createListInput:CreateListInput): Promise<List> {
+    async create(createListInput:CreateListInput): Promise<List> {
         const newList = await this.listsRepository.create(createListInput);
         return this.listsRepository.save(newList);
     }

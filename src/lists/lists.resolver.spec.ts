@@ -1,9 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ListsService } from './lists.service';
 import { ListsResolver } from './lists.resolver';
+import { CreateListInput } from './dto/create-list.input';
 
 describe('ListResolver', () => {
-  let resolver: ListsResolver;
+  let listsResolver: ListsResolver;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -32,21 +33,21 @@ describe('ListResolver', () => {
                 name: 'Product Meeting',
               }
             ]),
+            create: jest.fn((list: CreateListInput) => ({
+              id: 1,
+              ...list,
+            })),
           }),
         },
       ],
     }).compile();
 
-    resolver = module.get<ListsResolver>(ListsResolver);
-  });
-
-  it('should be defined', () => {
-    expect(resolver).toBeDefined();
+    listsResolver = module.get<ListsResolver>(ListsResolver);
   });
 
   describe('lists', () => {
     it('should get the list array', async () => {
-      expect(await resolver.findAll()).toEqual([
+      expect(await listsResolver.findAll()).toEqual([
         {
           id: expect.any(Number),
           name: 'Product Meeting',
@@ -63,10 +64,21 @@ describe('ListResolver', () => {
     });
 
     it('should get one list', async () => {
-      expect(await resolver.findOne(1)).toEqual([{
+      expect(await listsResolver.findOne(1)).toEqual([{
           id: expect.any(Number),
           name: 'Product Meeting',
         }]);
+    });
+
+    it('should create one list', async () => {
+      const list = {
+        id: 1,
+        name: 'Recruting Canidate List'
+      }
+      expect(await listsResolver.create(list)).toEqual({
+          id: expect.any(Number),
+          name: 'Recruting Canidate List',
+        });
     });
   });
 });

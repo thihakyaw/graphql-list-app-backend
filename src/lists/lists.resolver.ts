@@ -20,7 +20,7 @@ export class ListsResolver {
 
     @Mutation(() => List, {name: 'createList'})
     create(@Args('createListInput') createListInput: CreateListInput): Promise<List> {
-        return this.listsService.createList(createListInput);
+        return this.listsService.create(createListInput);
     }
 
     @ResolveField(() => [Task])
