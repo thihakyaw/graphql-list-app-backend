@@ -221,19 +221,19 @@ Sample Response
           {
             "id": 6,
             "name": "Order Task",
-						"status": "incomplete",
+	    "status": "incomplete",
             "order": 1
           },
           {
             "id": 7,
             "name": "Order Task #2",
-						"status": "incomplete",
+	    "status": "incomplete",
             "order": 2
           },
           {
             "id": 8,
             "name": "Order Task #3",
-						"status": "incomplete",
+	    "status": "incomplete",
             "order": 3
           }
         ]
@@ -245,19 +245,19 @@ Sample Response
           {
             "id": 11,
             "name": "Update Final Task #3",
-						"status": "complete",
+	    "status": "complete",
             "order": 1
           },
           {
             "id": 9,
             "name": "Final Task #1",
-						"status": "incomplete",
+	    "status": "incomplete",
             "order": 2
           },
           {
             "id": 10,
             "name": "Final Task #2",
-						"status": "incomplete",
+	    "status": "incomplete",
             "order": 3
           }
         ]
@@ -269,7 +269,7 @@ Sample Response
           {
             "id": 12,
             "name": "A New Task",
-						"status": "incomplete",
+	    "status": "incomplete",
             "order": 1
           }
         ]
@@ -309,7 +309,7 @@ Sample Response
         {
           "id": 12,
           "name": "A New Task",
-					"status": "incomplete",
+	  "status": "incomplete",
           "order": 1
         }
       ]
@@ -385,19 +385,19 @@ Sample Response -
       {
         "id": 11,
         "name": "Update Final Task #3",
-				"status": "completed",
+	"status": "completed",
         "order": 1
       },
       {
         "id": 9,
         "name": "Final Task #1",
-				"status": "incomplete",
+	"status": "incomplete",
         "order": 2
       },
       {
         "id": 10,
         "name": "Final Task #2",
-				"status": "incomplete",
+	"status": "incomplete",
         "order": 3
       }
     ]
