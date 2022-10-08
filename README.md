@@ -326,7 +326,7 @@ Replace the id of the task that you want to update in `{{id}}`
 
 Replace the name of the task that you want to update in `{{name}}`  
 
-Replace the status of the task that you want to update in `{{status}}`  
+Replace the status of the task that you want to update in `{{status}}`  || The recommended status should be `incomplete`, `in_progress` and `completed`
 
 ```graphql
 mutation {
