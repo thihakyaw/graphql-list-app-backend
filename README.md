@@ -65,6 +65,7 @@ Or the database name you prefer
 `npm install`
 
 ** You may see warnings about some packages are deprecated. It is fine. It is from NestJS packages. I am waiting for the update to be fixed. **
+
 ![image](https://user-images.githubusercontent.com/16256698/194688500-82b936bd-6c4b-4760-881d-f26475da6596.png)
 
 
