@@ -12,7 +12,7 @@ Nest (NestJS) is a framework for building efficient, scalable Node.js ****server
 
 - clone the repo to your local machine
 
-`git clone [git@github.com](mailto:git@github.com):thihakyaw/graphql-list-app-backend.git`
+`git clone git@github.com:thihakyaw/graphql-list-app-backend.git`
 
 - get into the project directory
 
