@@ -74,8 +74,10 @@ Or the database name you prefer
 
 Due to the time limitation, we cannot run tests in docker container. Docker is only for testing the GraphQL. However, you can run test on locally by -
 
-`npm test`!
-[Screen Shot 2022-07-13 at 10 48 10](https://user-images.githubusercontent.com/16256698/194686833-97cfe50d-50c0-49ae-b311-39d5c2a14129.png)
+`npm test`
+
+![Screen Shot 2022-10-08 at 01 11 50](https://user-images.githubusercontent.com/16256698/194687525-83636fee-3c8e-494d-a6d6-7705d7e18a74.png)
+
 
 ** Because of the time limitation, I wasn’t able to add `e2e`  tests. And if I have more time, I can improve my test suites with test database.**
 
