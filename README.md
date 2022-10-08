@@ -54,7 +54,7 @@ DB_USERNAME=root
 DB_PASSWORD=secret
 ```
 
-** You need to create a database before you running project. Go to your mysql client and run this query **
+** You need to create a database before you running project. Go to your mysql client (eg. Workbench) and run this query **
 
 `create database graphql_list_app;`
 
@@ -63,6 +63,10 @@ Or the database name you prefer
 - install dependencies
 
 `npm install`
+
+** You may see warnings about some packages are deprecated. It is fine. It is from NestJS packages. I am waiting for the update to be fixed. **
+![image](https://user-images.githubusercontent.com/16256698/194688500-82b936bd-6c4b-4760-881d-f26475da6596.png)
+
 
 - start the project
 
