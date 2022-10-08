@@ -157,9 +157,9 @@ Sample Response
 }
 ```
 
-### 3. Get A List Of Lists
+### 3. Get All Lists
 
-Run this query in the GraphQL playground to get a list of lists alongside with tasks. The tasks are in ascending order.
+Run this query in the GraphQL playground to get all lists alongside with tasks. The tasks are in ascending order.
 
 ```graphql
 {
