@@ -81,7 +81,7 @@ Due to the time limitation, we cannot run tests in docker container. Docker is o
 
 `npm test`
 
-![Screen Shot 2022-10-08 at 01 11 50](https://user-images.githubusercontent.com/16256698/194687525-83636fee-3c8e-494d-a6d6-7705d7e18a74.png)
+![image](https://user-images.githubusercontent.com/16256698/194716318-d365d4e9-3233-4570-a460-331759ab21e8.png)
 
 
 ** Because of the time limitation, I wasn’t able to add `e2e`  tests. And if I have more time, I can improve my test suites with test database.**
