@@ -12,7 +12,7 @@ Nest (NestJS) is a framework for building efficient, scalable Node.js ****server
 
 - clone the repo to your local machine
 
-`git clone [git@github.com](mailto:git@github.com):thihakyaw/graphql-list-app-backend.git`
+`git clone git@github.com:thihakyaw/graphql-list-app-backend.git`
 
 - get into the project directory
 
@@ -56,7 +56,7 @@ DB_PASSWORD=secret
 
 ** You need to create a database before you running project. Go to your mysql client and run this query **
 
-`create database graphql_list_app`
+`create database graphql_list_app;`
 
 Or the database name you prefer
 
@@ -76,7 +76,8 @@ Due to the time limitation, we cannot run tests in docker container. Docker is o
 
 `npm test`
 
-![Screen Shot 2022-10-08 at 10.35.52.png](GraphQL%20List%20App%20da2852cb927c414685e406e928167b9a/Screen_Shot_2022-10-08_at_10.35.52.png)
+![Screen Shot 2022-10-08 at 01 11 50](https://user-images.githubusercontent.com/16256698/194687525-83636fee-3c8e-494d-a6d6-7705d7e18a74.png)
+
 
 ** Because of the time limitation, I wasn’t able to add `e2e`  tests. And if I have more time, I can improve my test suites with test database.**
 
@@ -180,25 +181,25 @@ Sample Response
           {
             "id": 2,
             "name": "Updating Finish in 22 hours",
-						"status": "in_progress",
+	    "status": "in_progress",
             "order": 1
           },
           {
             "id": 4,
             "name": "The Sorting Order Task",
-						"status": "incomplete",
+	    "status": "incomplete",
             "order": 2
           },
           {
             "id": 1,
             "name": "Finish in 72 hours",
-						"status": "incomplete",
+	    "status": "incomplete",
             "order": 3
           },
           {
             "id": 5,
             "name": "Another Sorting Order Task #",
-						"status": "completed",
+	    "status": "completed",
             "order": 4
           }
         ]
@@ -210,7 +211,7 @@ Sample Response
           {
             "id": 3,
             "name": "Updating Another Task for #3",
-						"status": "completed",
+	    "status": "completed",
             "order": 2
           }
         ]
@@ -222,19 +223,19 @@ Sample Response
           {
             "id": 6,
             "name": "Order Task",
-						"status": "incomplete",
+	    "status": "incomplete",
             "order": 1
           },
           {
             "id": 7,
             "name": "Order Task #2",
-						"status": "incomplete",
+	    "status": "incomplete",
             "order": 2
           },
           {
             "id": 8,
             "name": "Order Task #3",
-						"status": "incomplete",
+	    "status": "incomplete",
             "order": 3
           }
         ]
@@ -246,19 +247,19 @@ Sample Response
           {
             "id": 11,
             "name": "Update Final Task #3",
-						"status": "complete",
+	    "status": "complete",
             "order": 1
           },
           {
             "id": 9,
             "name": "Final Task #1",
-						"status": "incomplete",
+	    "status": "incomplete",
             "order": 2
           },
           {
             "id": 10,
             "name": "Final Task #2",
-						"status": "incomplete",
+	    "status": "incomplete",
             "order": 3
           }
         ]
@@ -270,7 +271,7 @@ Sample Response
           {
             "id": 12,
             "name": "A New Task",
-						"status": "incomplete",
+	    "status": "incomplete",
             "order": 1
           }
         ]
@@ -310,7 +311,7 @@ Sample Response
         {
           "id": 12,
           "name": "A New Task",
-					"status": "incomplete",
+	  "status": "incomplete",
           "order": 1
         }
       ]
@@ -327,7 +328,7 @@ Replace the id of the task that you want to update in `{{id}}`
 
 Replace the name of the task that you want to update in `{{name}}`  
 
-Replace the status of the task that you want to update in `{{status}}`  
+Replace the status of the task that you want to update in `{{status}}`  || The recommended status should be `incomplete`, `in_progress` and `completed`
 
 ```graphql
 mutation {
@@ -386,19 +387,19 @@ Sample Response -
       {
         "id": 11,
         "name": "Update Final Task #3",
-				"status": "completed",
+	"status": "completed",
         "order": 1
       },
       {
         "id": 9,
         "name": "Final Task #1",
-				"status": "incomplete",
+	"status": "incomplete",
         "order": 2
       },
       {
         "id": 10,
         "name": "Final Task #2",
-				"status": "incomplete",
+	"status": "incomplete",
         "order": 3
       }
     ]
