@@ -179,19 +179,19 @@ Sample Response
           {
             "id": 2,
             "name": "Updating Finish in 22 hours",
-						"status": "in_progress",
+	    "status": "in_progress",
             "order": 1
           },
           {
             "id": 4,
             "name": "The Sorting Order Task",
-						"status": "incomplete",
+	    "status": "incomplete",
             "order": 2
           },
           {
             "id": 1,
             "name": "Finish in 72 hours",
-						"status": "incomplete",
+	    "status": "incomplete",
             "order": 3
           },
           {
@@ -209,7 +209,7 @@ Sample Response
           {
             "id": 3,
             "name": "Updating Another Task for #3",
-						"status": "completed",
+	    "status": "completed",
             "order": 2
           }
         ]
