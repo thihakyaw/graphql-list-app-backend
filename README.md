@@ -56,7 +56,7 @@ DB_PASSWORD=secret
 
 ** You need to create a database before you running project. Go to your mysql client and run this query **
 
-`create database graphql_list_app`
+`create database graphql_list_app;`
 
 Or the database name you prefer
 
